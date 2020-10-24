@@ -1,6 +1,7 @@
-﻿using System.Net.Http;
-using System.Net.Mime;
+﻿using System.Net.Mime;
 using System.Threading.Tasks;
+using Leff.Azure.WebApplication.Models.Enums;
+using Leff.Azure.WebApplication.Services;
 using Microsoft.AspNetCore.Mvc;
 using SkiaSharp;
 
@@ -9,9 +10,6 @@ namespace Leff.Azure.WebApplication.Controllers
     [Route("simaland/image")]
     public class SimaLandImageController : Controller
     {
-        private const string Image700 = "700-nw.jpg";
-        private const string Image1600 = "1600.jpg";
-
         private const int Left = 32;
         private const int Top = 32;
         private const int Width = 512;
@@ -30,21 +28,24 @@ namespace Leff.Azure.WebApplication.Controllers
         private static readonly SKJpegEncoderOptions JpegEncoderOptions =
             new SKJpegEncoderOptions(95, SKJpegEncoderDownsample.Downsample422, SKJpegEncoderAlphaOption.Ignore);
 
-        //private static readonly HttpClient HttpClient = new HttpClient {BaseAddress = new Uri("https://cdn2.static1-sima-land.com/items/")};
+        private readonly SimaLandService _simaLandService;
+        private readonly ImageProcessingService _imageProcessingService;
 
-        private readonly HttpClient _httpClient;
-
-        public SimaLandImageController(IHttpClientFactory httpClientFactory)
+        public SimaLandImageController(
+            SimaLandService simaLandService,
+            ImageProcessingService imageProcessingService)
         {
-            _httpClient = httpClientFactory.CreateClient(nameof(SimaLandImageController));
+            _simaLandService = simaLandService;
+            _imageProcessingService = imageProcessingService;
         }
 
         [HttpGet]
         [Route("{goodId}/{imageIndex}")]
+        [ResponseCache(Duration = 86400, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> DecodeImageAsync(int goodId, int imageIndex)
         {
-            using var image700 = await GetImageAsync(goodId, imageIndex, Image700);
-            using var image1600 = await GetImageAsync(goodId, imageIndex, Image1600);
+            using var image700 = await GetImageAsync(goodId, imageIndex, SimaLandImageSize.Quad700);
+            using var image1600 = await GetImageAsync(goodId, imageIndex, SimaLandImageSize.Quad1600Watermark);
             using var canvas = new SKCanvas(image1600);
             canvas.DrawBitmap(image700, SourceRect, DestRect, Paint);
             return ImageToFileStream(image1600);
@@ -57,10 +58,9 @@ namespace Leff.Azure.WebApplication.Controllers
             return File(data.AsStream(true), MediaTypeNames.Image.Jpeg);
         }
 
-        private async Task<SKBitmap> GetImageAsync(int goodId, int imageIndex, string name)
+        private async Task<SKBitmap> GetImageAsync(int itemId, int imageIndex, SimaLandImageSize imageSize)
         {
-            var uri = $"{goodId}/{imageIndex}/{name}";
-            await using var stream = await _httpClient.GetStreamAsync(uri);
+            await using var stream = await _simaLandService.DownloadImageAsync(itemId, imageIndex, imageSize);
             return SKBitmap.Decode(stream);
         }
     }

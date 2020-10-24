@@ -34,7 +34,9 @@ namespace Leff.Azure.WebApplication
             });
 
             services.AddMemoryCache();
+            services.AddScoped<ImageProcessingService>();
             services.AddScoped<SimaLandService>();
+            services.AddHttpClient<SimaLandService>();
             services.AddHttpClient<SimaLandApiClient>();
             services.Configure<SimaLandClientConfiguration>(_configuration.GetSection("Simaland"));
 
