@@ -6,7 +6,6 @@ using Leff.Azure.WebApplication.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,10 +16,12 @@ namespace Leff.Azure.WebApplication
     {
         private readonly Uri _baseImageUri = new Uri("https://cdn2.static1-sima-land.com/items/");
         private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _environment;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             _configuration = configuration;
+            _environment = environment;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -42,9 +43,9 @@ namespace Leff.Azure.WebApplication
 
             services.AddHttpClient(nameof(SimaLandImageController), c => c.BaseAddress = _baseImageUri);
 
-            services
-                .AddMvc(options => options.EnableEndpointRouting = false)
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddControllers();
+            var mvcBuilder = services.AddRazorPages();
+            if (_environment.IsDevelopment()) mvcBuilder.AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,7 +66,12 @@ namespace Leff.Azure.WebApplication
             applicationBuilder.UseStaticFiles();
             applicationBuilder.UseCookiePolicy();
 
-            applicationBuilder.UseMvc();
+            applicationBuilder.UseRouting();
+            applicationBuilder.UseEndpoints(builder =>
+            {
+                builder.MapControllers();
+                builder.MapRazorPages();
+            });
         }
     }
 }
