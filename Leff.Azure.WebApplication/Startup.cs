@@ -1,5 +1,8 @@
 using System;
+using Amphasis.SimaLand;
 using Leff.Azure.WebApplication.Controllers;
+using Leff.Azure.WebApplication.Models;
+using Leff.Azure.WebApplication.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +32,11 @@ namespace Leff.Azure.WebApplication
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddMemoryCache();
+            services.AddScoped<SimaLandService>();
+            services.AddHttpClient<SimaLandApiClient>();
+            services.Configure<SimaLandClientConfiguration>(_configuration.GetSection("Simaland"));
 
             services.AddHttpClient(nameof(SimaLandImageController), c => c.BaseAddress = _baseImageUri);
 
