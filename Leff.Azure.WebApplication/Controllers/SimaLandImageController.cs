@@ -1,5 +1,6 @@
 ﻿using System.Net.Mime;
 using System.Threading.Tasks;
+using Leff.Azure.WebApplication.Models;
 using Leff.Azure.WebApplication.Models.Enums;
 using Leff.Azure.WebApplication.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,19 +11,6 @@ namespace Leff.Azure.WebApplication.Controllers
     [Route("simaland/image")]
     public class SimaLandImageController : Controller
     {
-        private const int Left = 32;
-        private const int Top = 32;
-        private const int Width = 512;
-        private const int Height = 64;
-
-        private const int Right = Left + Width;
-        private const int Bottom = Top + Height;
-
-        private const float Ratio = 700.0f / 1600;
-
-        private static readonly SKRect DestRect = new SKRect(Left, Top, Right, Bottom);
-        private static readonly SKRect SourceRect = new SKRect(Left * Ratio, Top * Ratio, Right * Ratio, Bottom * Ratio);
-
         private static readonly SKPaint Paint = new SKPaint {FilterQuality = SKFilterQuality.High};
 
         private static readonly SKJpegEncoderOptions JpegEncoderOptions =
@@ -41,13 +29,17 @@ namespace Leff.Azure.WebApplication.Controllers
 
         [HttpGet]
         [Route("{goodId}/{imageIndex}")]
+#if !DEBUG
         [ResponseCache(Duration = 86400, Location = ResponseCacheLocation.Any)]
+#endif
         public async Task<IActionResult> DecodeImageAsync(int goodId, int imageIndex)
         {
             using var image700 = await GetImageAsync(goodId, imageIndex, SimaLandImageSize.Quad700);
             using var image1600 = await GetImageAsync(goodId, imageIndex, SimaLandImageSize.Quad1600Watermark);
             using var canvas = new SKCanvas(image1600);
-            canvas.DrawBitmap(image700, SourceRect, DestRect, Paint);
+            var sourceRect = SimaLandWatermark.GetSkRect(700);
+            var destRect = SimaLandWatermark.GetSkRect(1600);
+            canvas.DrawBitmap(image700, sourceRect, destRect, Paint);
             return ImageToFileStream(image1600);
         }
 
