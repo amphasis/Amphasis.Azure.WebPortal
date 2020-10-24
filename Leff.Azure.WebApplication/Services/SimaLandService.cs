@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Amphasis.SimaLand;
+using Amphasis.SimaLand.Models;
 using Leff.Azure.WebApplication.Extensions;
 using Leff.Azure.WebApplication.Models;
 using Leff.Azure.WebApplication.Models.Enums;
@@ -33,6 +35,14 @@ namespace Leff.Azure.WebApplication.Services
             _apiClient = apiClient;
             _memoryCache = memoryCache;
             _httpClient = httpClient;
+        }
+
+        public async Task<IList<ItemResponse>> GetItemsAsync(int pageIndex)
+        {
+            await AuthorizeAsync();
+            var itemList = await _apiClient.GetItemsAsync(pageIndex);
+
+            return itemList;
         }
 
         public async Task<Stream> DownloadImageAsync(int itemId, int imageIndex, SimaLandImageSize imageSize)
