@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace Leff.Azure.WebApplication.Extensions
+namespace Amphasis.Azure.WebPortal.Extensions
 {
     public static class EnumExtensions
     {

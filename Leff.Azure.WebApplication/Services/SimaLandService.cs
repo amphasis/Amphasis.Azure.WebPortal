@@ -5,15 +5,15 @@ using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Amphasis.Azure.WebPortal.Extensions;
+using Amphasis.Azure.WebPortal.Models;
+using Amphasis.Azure.WebPortal.Models.Enums;
 using Amphasis.SimaLand;
 using Amphasis.SimaLand.Models;
-using Leff.Azure.WebApplication.Extensions;
-using Leff.Azure.WebApplication.Models;
-using Leff.Azure.WebApplication.Models.Enums;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
-namespace Leff.Azure.WebApplication.Services
+namespace Amphasis.Azure.WebPortal.Services
 {
     public class SimaLandService
     {

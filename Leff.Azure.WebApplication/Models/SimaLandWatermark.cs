@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace Leff.Azure.WebApplication.Models
+namespace Amphasis.Azure.WebPortal.Models
 {
     public static class SimaLandWatermark
     {

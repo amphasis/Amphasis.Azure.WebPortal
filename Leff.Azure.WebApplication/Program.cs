@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Leff.Azure.WebApplication
+namespace Amphasis.Azure.WebPortal
 {
     public static class Program
     {

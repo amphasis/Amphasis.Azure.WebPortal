@@ -1,4 +1,4 @@
-﻿namespace Leff.Azure.WebApplication.Services
+﻿namespace Amphasis.Azure.WebPortal.Services
 {
     public class ImageProcessingService
     {

@@ -1,4 +1,4 @@
-﻿namespace Leff.Azure.WebApplication.Models
+﻿namespace Amphasis.Azure.WebPortal.Models
 {
     public class SimaLandClientConfiguration
     {

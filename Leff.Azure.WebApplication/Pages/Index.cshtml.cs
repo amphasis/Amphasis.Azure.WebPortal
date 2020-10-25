@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Leff.Azure.WebApplication.Pages
+namespace Amphasis.Azure.WebPortal.Pages
 {
     public class IndexModel : PageModel
     {

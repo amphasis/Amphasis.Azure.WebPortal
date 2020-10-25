@@ -1,6 +1,6 @@
+using Amphasis.Azure.WebPortal.Models;
+using Amphasis.Azure.WebPortal.Services;
 using Amphasis.SimaLand;
-using Leff.Azure.WebApplication.Models;
-using Leff.Azure.WebApplication.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Leff.Azure.WebApplication
+namespace Amphasis.Azure.WebPortal
 {
     public class Startup
     {

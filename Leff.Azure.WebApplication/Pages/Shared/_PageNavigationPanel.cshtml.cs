@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Leff.Azure.WebApplication.Pages.Shared
+namespace Amphasis.Azure.WebPortal.Pages.Shared
 {
     public class PageNavigationPanelModel
     {

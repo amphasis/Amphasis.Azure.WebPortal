@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leff.Azure.WebApplication", "Leff.Azure.WebApplication\Leff.Azure.WebApplication.csproj", "{79F4B347-9FDF-4545-AFF5-BF6D1A52839C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amphasis.Azure.WebPortal", "Leff.Azure.WebApplication\Amphasis.Azure.WebPortal.csproj", "{79F4B347-9FDF-4545-AFF5-BF6D1A52839C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

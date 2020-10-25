@@ -1,12 +1,12 @@
 ﻿using System.Net.Mime;
 using System.Threading.Tasks;
-using Leff.Azure.WebApplication.Models;
-using Leff.Azure.WebApplication.Models.Enums;
-using Leff.Azure.WebApplication.Services;
+using Amphasis.Azure.WebPortal.Models;
+using Amphasis.Azure.WebPortal.Models.Enums;
+using Amphasis.Azure.WebPortal.Services;
 using Microsoft.AspNetCore.Mvc;
 using SkiaSharp;
 
-namespace Leff.Azure.WebApplication.Controllers
+namespace Amphasis.Azure.WebPortal.Controllers
 {
     [Route("simaland/image")]
     public class SimaLandImageController : Controller
