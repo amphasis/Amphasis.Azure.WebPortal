@@ -338,4 +338,4 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/Leff.Azure.WebApplication/Properties
+/Amphasis.Azure.WebPortal/Properties
