@@ -28,13 +28,11 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }} 
       
-      # Add private package sources
-      - name: Private package sources
-        run: nuget sources add -name "private-packages" -source ${{ env.NUGET_SOURCE }} -StorePasswordInClearText -username ${{ env.NUGET_USERNAME }} -password ${{ secrets.PACKAGES_TOKEN }}
-      
       # Run dotnet build and publish
       - name: dotnet build and publish
         run: |
+          nuget sources add -name "private-packages" -source ${{ env.NUGET_SOURCE }} -StorePasswordInClearText -username ${{ env.NUGET_USERNAME }} -password ${{ secrets.PACKAGES_TOKEN }}
+          dotnet restore
           dotnet build --configuration Release
           dotnet publish -c Release -o ${{ env.AZURE_WEBAPP_PROJECT_PATH }}
           
