@@ -1,10 +1,13 @@
 ﻿@page
-@using Leff.Azure.WebApplication.Pages.Shared
 @model SimaLandGoodsModel
+
+@using Leff.Azure.WebApplication.Extensions
+@using Leff.Azure.WebApplication.Models.Enums
+@using Leff.Azure.WebApplication.Pages.Shared
 
 @{
     ViewData["Title"] = "SimaLand Goods";
-    var navigationModel = new PageNavigationPanelModel(Model.PageIndex) {NavigationSpread = 10};
+    var navigationModel = new PageNavigationPanelModel(Model.PageIndex);
 }
 
 <partial name="_PageNavigationPanel" model="navigationModel" />
@@ -23,7 +26,14 @@
         {
             <tr>
                 <th scope="row">@item.Id</th>
-                <td><img src="@($"{item.BasePhotoUrl}0/140.jpg")"></td>
+                <td>
+                    @foreach (int imageIndex in item.PhotoIdentifiers ?? Enumerable.Empty<int>())
+                    {
+                        <a asp-controller="SimaLandImage" asp-action="DeWatermark" asp-route-goodId="@item.Id" asp-route-imageIndex="@imageIndex" target="_blank">
+                            <img src="@($"{item.BasePhotoUrl}{imageIndex}/{SimaLandImageSize.Quad140.GetEnumMemberValue()}")" alt="@item.Name">
+                        </a>
+                    }
+                </td>
                 <td>
                     @foreach (string barcode in item.Barcodes ?? Enumerable.Empty<string>())
                     {
@@ -35,3 +45,5 @@
         }
     </tbody>
 </table>
+
+<partial name="_PageNavigationPanel" model="navigationModel" />

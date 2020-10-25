@@ -1,6 +1,4 @@
-using System;
 using Amphasis.SimaLand;
-using Leff.Azure.WebApplication.Controllers;
 using Leff.Azure.WebApplication.Models;
 using Leff.Azure.WebApplication.Services;
 using Microsoft.AspNetCore.Builder;
@@ -14,7 +12,6 @@ namespace Leff.Azure.WebApplication
 {
     public class Startup
     {
-        private readonly Uri _baseImageUri = new Uri("https://cdn2.static1-sima-land.com/items/");
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _environment;
 
@@ -27,13 +24,6 @@ namespace Leff.Azure.WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
             services.AddMemoryCache();
             services.AddScoped<ImageProcessingService>();
             services.AddScoped<SimaLandService>();
@@ -41,11 +31,20 @@ namespace Leff.Azure.WebApplication
             services.AddHttpClient<SimaLandApiClient>();
             services.Configure<SimaLandClientConfiguration>(_configuration.GetSection("Simaland"));
 
-            services.AddHttpClient(nameof(SimaLandImageController), c => c.BaseAddress = _baseImageUri);
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
+            var razorPagesBuilder = services.AddRazorPages();
             services.AddControllers();
-            var mvcBuilder = services.AddRazorPages();
-            if (_environment.IsDevelopment()) mvcBuilder.AddRazorRuntimeCompilation();
+
+            if (_environment.IsDevelopment())
+            {
+                razorPagesBuilder.AddRazorRuntimeCompilation();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +57,6 @@ namespace Leff.Azure.WebApplication
             else
             {
                 applicationBuilder.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 applicationBuilder.UseHsts();
             }
 
@@ -69,8 +67,8 @@ namespace Leff.Azure.WebApplication
             applicationBuilder.UseRouting();
             applicationBuilder.UseEndpoints(builder =>
             {
-                builder.MapControllers();
                 builder.MapRazorPages();
+                builder.MapControllers();
             });
         }
     }

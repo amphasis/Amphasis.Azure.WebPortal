@@ -27,19 +27,20 @@ namespace Leff.Azure.WebApplication.Controllers
             _imageProcessingService = imageProcessingService;
         }
 
-        [HttpGet]
-        [Route("{goodId}/{imageIndex}")]
 #if !DEBUG
         [ResponseCache(Duration = 86400, Location = ResponseCacheLocation.Any)]
 #endif
-        public async Task<IActionResult> DecodeImageAsync(int goodId, int imageIndex)
+        [HttpGet("{goodId}/{imageIndex}")]
+        public async Task<IActionResult> DeWatermark([FromRoute] int goodId, [FromRoute] int imageIndex)
         {
             using var image700 = await GetImageAsync(goodId, imageIndex, SimaLandImageSize.Quad700);
             using var image1600 = await GetImageAsync(goodId, imageIndex, SimaLandImageSize.Quad1600Watermark);
+
             using var canvas = new SKCanvas(image1600);
             var sourceRect = SimaLandWatermark.GetSkRect(700);
             var destRect = SimaLandWatermark.GetSkRect(1600);
             canvas.DrawBitmap(image700, sourceRect, destRect, Paint);
+
             return ImageToFileStream(image1600);
         }
 
