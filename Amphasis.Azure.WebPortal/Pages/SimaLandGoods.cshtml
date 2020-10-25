@@ -30,8 +30,8 @@
             <td>
                 @foreach (int imageIndex in item.PhotoIdentifiers ?? Enumerable.Empty<int>())
                 {
-                    <a asp-controller="SimaLandImage" asp-action="DeWatermark" asp-route-goodId="@item.Id" asp-route-imageIndex="@imageIndex" target="_blank">
-                        <img src="@($"{item.BasePhotoUrl}{imageIndex}/{SimaLandImageSize.Quad140.GetEnumMemberValue()}")" alt="@item.Name">
+                    <a class="zoom" asp-controller="SimaLandImage" asp-action="DeWatermark" asp-route-goodId="@item.Id" asp-route-imageIndex="@imageIndex" target="_blank">
+                        <img class="img-thumbnail" src="@($"{item.BasePhotoUrl}{imageIndex}/{SimaLandImageSize.Quad140.GetEnumMemberValue()}")" alt="@item.Name">
                     </a>
                 }
             </td>
