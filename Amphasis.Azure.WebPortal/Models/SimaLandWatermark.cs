@@ -6,10 +6,10 @@ namespace Amphasis.Azure.WebPortal.Models
     {
         private const int ImageSize = 1600;
 
-        private const int X = 32;
-        private const int Y = 32;
-        private const int Width = 512;
-        private const int Height = 64;
+        private const int X = 40;
+        private const int Y = 40;
+        private const int Width = 480;
+        private const int Height = 56;
 
         private const float ReducedX = (float) X / ImageSize;
         private const float ReducedY = (float) Y / ImageSize;
