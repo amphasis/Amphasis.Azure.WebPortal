@@ -31,7 +31,7 @@ jobs:
       # Restore packages
       - name: Restore packages
         run: |
-          nuget sources add -name "private-packages" -source ${{ env.NUGET_SOURCE }} -StorePasswordInClearText -username ${{ env.NUGET_USERNAME }} -password ${{ secrets.PACKAGES_TOKEN }}
+          dotnet nuget add source ${{ env.NUGET_SOURCE }} --name "private-packages" --store-password-in-clear-text --username ${{ env.NUGET_USERNAME }} --password ${{ secrets.PACKAGES_TOKEN }}
           dotnet restore --source "private-packages"
 
       # Run dotnet build and publish
