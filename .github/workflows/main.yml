@@ -32,7 +32,7 @@ jobs:
       - name: Restore packages
         run: |
           dotnet nuget add source ${{ env.NUGET_SOURCE }} --name "private-packages" --store-password-in-clear-text --username ${{ env.NUGET_USERNAME }} --password ${{ secrets.PACKAGES_TOKEN }}
-          dotnet restore --source "private-packages"
+          dotnet restore
 
       # Run dotnet build and publish
       - name: dotnet build and publish
