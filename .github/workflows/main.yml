@@ -7,10 +7,12 @@ on:
     branches: [ master ]
 
 env:
+  NUGET_USERNAME: amphasis 
+  NUGET_SOURCE: https://nuget.pkg.github.com/amphasis/index.json
+  DOTNET_VERSION: '3.1.403'
   AZURE_WEBAPP_NAME: 'leff'
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   AZURE_WEBAPP_PROJECT_PATH: 'Amphasis.Azure.WebPortal' 
-  DOTNET_VERSION: '3.1.403'
 
 jobs:
   build-and-deploy:
@@ -25,6 +27,10 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }} 
+      
+      # Add private package sources
+      - name: Private package sources
+        run: nuget sources add -name "private-packages" -source ${{ env.NUGET_SOURCE }} -StorePasswordInClearText -username ${{ env.NUGET_USERNAME }} -password ${{ secrets.PACKAGES_TOKEN }}
       
       # Run dotnet build and publish
       - name: dotnet build and publish
