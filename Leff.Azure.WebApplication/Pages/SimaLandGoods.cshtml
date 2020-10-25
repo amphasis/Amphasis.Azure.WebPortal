@@ -9,40 +9,40 @@
     var navigationModel = new PageNavigationPanelModel(Model.PageIndex);
 }
 
-<partial name="_PageNavigationPanel" model="navigationModel" />
+<div class="sticky-top d-flex justify-content-center">
+    <partial name="_PageNavigationPanel" model="navigationModel"/>
+</div>
 
 <table class="table">
     <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">Изображение</th>
-            <th scope="col">Штрих-коды</th>
-            <th scope="col">Наименование</th>
-        </tr>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">Изображение</th>
+        <th scope="col">Штрих-коды</th>
+        <th scope="col">Наименование</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Goods)
-        {
-            <tr>
-                <th scope="row">@item.Id</th>
-                <td>
-                    @foreach (int imageIndex in item.PhotoIdentifiers ?? Enumerable.Empty<int>())
-                    {
-                        <a asp-controller="SimaLandImage" asp-action="DeWatermark" asp-route-goodId="@item.Id" asp-route-imageIndex="@imageIndex" target="_blank">
-                            <img src="@($"{item.BasePhotoUrl}{imageIndex}/{SimaLandImageSize.Quad140.GetEnumMemberValue()}")" alt="@item.Name">
-                        </a>
-                    }
-                </td>
-                <td>
-                    @foreach (string barcode in item.Barcodes ?? Enumerable.Empty<string>())
-                    {
-                        @barcode<br />
-                    }
-                </td>
-                <td><a href="@($"https://www.sima-land.ru/{item.Sid}")" target="_blank">@item.Name</a></td>
-            </tr>
-        }
+    @foreach (var item in Model.Goods)
+    {
+        <tr>
+            <th scope="row">@item.Id</th>
+            <td>
+                @foreach (int imageIndex in item.PhotoIdentifiers ?? Enumerable.Empty<int>())
+                {
+                    <a asp-controller="SimaLandImage" asp-action="DeWatermark" asp-route-goodId="@item.Id" asp-route-imageIndex="@imageIndex" target="_blank">
+                        <img src="@($"{item.BasePhotoUrl}{imageIndex}/{SimaLandImageSize.Quad140.GetEnumMemberValue()}")" alt="@item.Name">
+                    </a>
+                }
+            </td>
+            <td>
+                @foreach (string barcode in item.Barcodes ?? Enumerable.Empty<string>())
+                {
+                    @barcode<br />
+                }
+            </td>
+            <td><a href="@($"https://www.sima-land.ru/{item.Sid}")" target="_blank">@item.Name</a></td>
+        </tr>
+    }
     </tbody>
 </table>
-
-<partial name="_PageNavigationPanel" model="navigationModel" />

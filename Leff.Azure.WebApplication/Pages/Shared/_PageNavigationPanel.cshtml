@@ -8,49 +8,45 @@
     int navigationLast = navigationFirst + 2 * Model.NavigationSpread;
 }
 
-<form method="get" asp-page="./Index">
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            
-            @if (navigationPrevious == currentPage)
-            {
-                <li class="page-item disabled">
-                    <span aria-label="Previous" class="page-link">
-                        <span aria-hidden="true">&laquo;</span>
-                    </span>
-                </li>
-            }
-            else
-            {
-                <li class="page-item">
-                    <a asp-route-pageIndex="@navigationPrevious" aria-label="Previous" class="page-link">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            }
+<ul class="pagination">
 
-            @for (int pageIndex = navigationFirst; pageIndex <= navigationLast; pageIndex++)
-            {
-                @if (pageIndex == currentPage)
-                {
-                    <li class="page-item active">
-                        <span class="page-link">@pageIndex<span class="sr-only">(current)</span></span>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a asp-route-pageIndex="@pageIndex" class="page-link">@pageIndex</a>
-                    </li>
-                }
-            }
+    @if (navigationPrevious == currentPage)
+    {
+        <li class="page-item disabled">
+            <span aria-label="Previous" class="page-link">
+                <span aria-hidden="true">&laquo;</span>
+            </span>
+        </li>
+    }
+    else
+    {
+        <li class="page-item">
+            <a asp-route-pageIndex="@navigationPrevious" aria-label="Previous" class="page-link">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    }
 
-            <li class="page-item">
-                <a asp-route-pageIndex="@navigationNext" aria-label="Next" class="page-link">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
+    @for (int pageIndex = navigationFirst; pageIndex <= navigationLast; pageIndex++)
+    {
+        @if (pageIndex == currentPage)
+        {
+            <li class="page-item active">
+                <span class="page-link">@pageIndex<span class="sr-only">(current)</span></span>
             </li>
+        }
+        else
+        {
+            <li class="page-item">
+                <a asp-route-pageIndex="@pageIndex" class="page-link">@pageIndex</a>
+            </li>
+        }
+    }
 
-        </ul>
-    </nav>
-</form>
+    <li class="page-item">
+        <a asp-route-pageIndex="@navigationNext" aria-label="Next" class="page-link">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+
+</ul>
