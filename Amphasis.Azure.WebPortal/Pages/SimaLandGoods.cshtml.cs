@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Amphasis.Azure.WebPortal.Pages
 {
+    [ResponseCache(Duration = 3600, VaryByQueryKeys = new[] {"pageIndex"})]
     public class SimaLandGoodsModel : PageModel
     {
         [FromQuery(Name = "pageIndex")]

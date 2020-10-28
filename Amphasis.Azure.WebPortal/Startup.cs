@@ -25,6 +25,7 @@ namespace Amphasis.Azure.WebPortal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMemoryCache();
+            services.AddResponseCaching();
             services.AddScoped<ImageProcessingService>();
             services.AddScoped<SimaLandService>();
             services.AddHttpClient<SimaLandService>();
@@ -61,6 +62,7 @@ namespace Amphasis.Azure.WebPortal
             }
 
             applicationBuilder.UseHttpsRedirection();
+            applicationBuilder.UseResponseCaching();
             applicationBuilder.UseStaticFiles();
             applicationBuilder.UseCookiePolicy();
 
