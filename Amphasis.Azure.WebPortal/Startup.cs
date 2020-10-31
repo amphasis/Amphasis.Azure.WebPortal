@@ -31,6 +31,7 @@ namespace Amphasis.Azure.WebPortal
             services.AddHttpClient<SimaLandService>();
             services.AddHttpClient<SimaLandApiClient>();
             services.Configure<SimaLandClientConfiguration>(_configuration.GetSection("Simaland"));
+            services.Configure<YandexConfiguration>(_configuration.GetSection("Yandex"));
 
             services.Configure<CookiePolicyOptions>(options =>
             {

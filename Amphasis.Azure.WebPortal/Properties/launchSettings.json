@@ -13,9 +13,7 @@
       "launchBrowser": true,
       "launchUrl": "https://localhost:44317/SimaLandGoods?pageIndex=741",
       "environmentVariables": {
-        "Simaland__Password": "securityhole",
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "Simaland__Email": "hl-studio@mail.ru"
       }
     },
     "Leff.Azure.WebApplication": {
