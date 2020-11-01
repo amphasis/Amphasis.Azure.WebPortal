@@ -1,8 +1,8 @@
 ﻿using System.Net.Mime;
 using System.Threading.Tasks;
-using Amphasis.Azure.WebPortal.Models;
-using Amphasis.Azure.WebPortal.Models.Enums;
-using Amphasis.Azure.WebPortal.Services;
+using Amphasis.Azure.WebPortal.SimaLand.Models;
+using Amphasis.Azure.WebPortal.SimaLand.Models.Enums;
+using Amphasis.Azure.WebPortal.SimaLand.Services;
 using Microsoft.AspNetCore.Mvc;
 using SkiaSharp;
 

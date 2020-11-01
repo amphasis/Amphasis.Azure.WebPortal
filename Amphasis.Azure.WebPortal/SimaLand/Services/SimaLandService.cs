@@ -6,14 +6,14 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Amphasis.Azure.WebPortal.Extensions;
-using Amphasis.Azure.WebPortal.Models;
-using Amphasis.Azure.WebPortal.Models.Enums;
+using Amphasis.Azure.WebPortal.SimaLand.Models;
+using Amphasis.Azure.WebPortal.SimaLand.Models.Enums;
 using Amphasis.SimaLand;
 using Amphasis.SimaLand.Models;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
-namespace Amphasis.Azure.WebPortal.Services
+namespace Amphasis.Azure.WebPortal.SimaLand.Services
 {
     public class SimaLandService
     {

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Amphasis.Azure.WebPortal.Models.Enums
+namespace Amphasis.Azure.WebPortal.SimaLand.Models.Enums
 {
     public enum SimaLandImageSize
     {

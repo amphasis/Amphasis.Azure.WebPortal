@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Amphasis.Azure.WebPortal.Services;
+using Amphasis.Azure.WebPortal.SimaLand.Services;
 using Amphasis.SimaLand.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

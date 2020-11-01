@@ -1,4 +1,4 @@
-﻿namespace Amphasis.Azure.WebPortal.Models
+﻿namespace Amphasis.Azure.WebPortal.Yandex.Models
 {
     public class YandexConfiguration
     {

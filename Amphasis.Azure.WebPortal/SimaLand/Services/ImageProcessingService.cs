@@ -1,4 +1,4 @@
-﻿namespace Amphasis.Azure.WebPortal.Services
+﻿namespace Amphasis.Azure.WebPortal.SimaLand.Services
 {
     public class ImageProcessingService
     {

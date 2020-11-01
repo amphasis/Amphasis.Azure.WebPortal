@@ -1,5 +1,6 @@
-using Amphasis.Azure.WebPortal.Models;
-using Amphasis.Azure.WebPortal.Services;
+using Amphasis.Azure.WebPortal.SimaLand.Models;
+using Amphasis.Azure.WebPortal.SimaLand.Services;
+using Amphasis.Azure.WebPortal.Yandex.Models;
 using Amphasis.SimaLand;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
