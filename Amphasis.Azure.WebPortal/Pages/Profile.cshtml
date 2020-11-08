@@ -1,0 +1,17 @@
+﻿@page
+@using System.Security.Claims
+@using Amphasis.Azure.WebPortal.Models
+@model Amphasis.Azure.WebPortal.Pages.ProfileModel
+@{
+    ViewData["Title"] = "User Profile";
+    var name = HttpContext.User.Identity.Name;
+    var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+    var nameIdentifier = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var userImageUrl = HttpContext.User.FindFirst(CustomClaims.UserImageUrl)?.Value;
+}
+<h1>@ViewData["Title"]</h1>
+<img src="@userImageUrl" />
+<p><span>Name:</span> @name</p>
+<p><span>E-Mail:</span> @email</p>
+<p><span>Name Identifier:</span> @nameIdentifier</p>
+<form method="post"><button>Sign Out</button></form>

@@ -3,11 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Amphasis.Azure.WebPortal.SimaLand.Services;
 using Amphasis.SimaLand.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Amphasis.Azure.WebPortal.Pages
 {
+    [Authorize]
     [ResponseCache(Duration = 3600, VaryByQueryKeys = new[] {"pageIndex"})]
     public class SimaLandGoodsModel : PageModel
     {
