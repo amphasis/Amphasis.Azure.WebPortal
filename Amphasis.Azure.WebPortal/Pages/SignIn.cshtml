@@ -1,0 +1,21 @@
+﻿@page
+@model Amphasis.Azure.WebPortal.Pages.SignInModel
+@{
+    ViewData["Title"] = "Sign in";
+}
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <p class="lead">using one of these external providers:</p>
+    <div class="d-flex justify-content-center">
+        @foreach (var scheme in Model.AuthenticationSchemes)
+        {
+            <form method="post">
+                <input type="hidden" asp-for="Provider" value="@scheme.Name" />
+                <input type="hidden" asp-for="ReturnUrl" />
+                <button class="btn zoom" type="submit">
+                    <img width="144" height="144" src="@scheme.IconUrl" alt="@scheme.DisplayName" title="@scheme.DisplayName" class="rounded" />
+                </button>
+            </form>
+        }
+    </div>
+</div>
