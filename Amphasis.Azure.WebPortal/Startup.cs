@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Amphasis.Azure.WebPortal.Models;
 using Amphasis.Azure.WebPortal.SimaLand.Models;
 using Amphasis.Azure.WebPortal.SimaLand.Services;
@@ -61,26 +62,30 @@ namespace Amphasis.Azure.WebPortal
                 {
                     _configuration.GetSection("MailRu").Bind(options);
 
-                    options.Events.OnCreatingTicket += async context =>
+                    options.Events.OnCreatingTicket += context =>
                     {
                         var identity = context.Identity;
-                        var imageClaim = identity.FindFirst(MailRuAuthenticationConstants.Claims.ImageUrl);
-                        identity.RemoveClaim(imageClaim);
-                        imageClaim = new Claim(CustomClaims.UserImageUrl, imageClaim.Value, imageClaim.ValueType);
-                        identity.AddClaim(imageClaim);
+                        var originalImageClaim = identity?.FindFirst(MailRuAuthenticationConstants.Claims.ImageUrl);
+                        if (originalImageClaim == null) return Task.CompletedTask;
+                        identity.RemoveClaim(originalImageClaim);
+                        var newImageClaim = new Claim(CustomClaims.UserImageUrl, originalImageClaim.Value, originalImageClaim.ValueType);
+                        identity.AddClaim(newImageClaim);
+                        return Task.CompletedTask;
                     };
                 })
                 .AddVkontakte(options =>
                 {
                     _configuration.GetSection("VK").Bind(options);
 
-                    options.Events.OnCreatingTicket += async context =>
+                    options.Events.OnCreatingTicket += context =>
                     {
                         var identity = context.Identity;
-                        var imageClaim = identity.FindFirst(VkontakteAuthenticationConstants.Claims.PhotoUrl);
-                        identity.RemoveClaim(imageClaim);
-                        imageClaim = new Claim(CustomClaims.UserImageUrl, imageClaim.Value, imageClaim.ValueType);
-                        identity.AddClaim(imageClaim);
+                        var originalImageClaim = identity?.FindFirst(VkontakteAuthenticationConstants.Claims.PhotoUrl);
+                        if (originalImageClaim == null) return Task.CompletedTask;
+                        identity.RemoveClaim(originalImageClaim);
+                        var newImageClaim = new Claim(CustomClaims.UserImageUrl, originalImageClaim.Value, originalImageClaim.ValueType);
+                        identity.AddClaim(newImageClaim);
+                        return Task.CompletedTask;
                     };
                 })
                 .AddYandex(options =>
@@ -89,6 +94,7 @@ namespace Amphasis.Azure.WebPortal
 
                     options.Events.OnCreatingTicket += async context =>
                     {
+                        if (context.Identity == null) return;
                         var uri = new Uri("https://login.yandex.ru/info");
                         var authorization = new AuthenticationHeaderValue("OAuth", context.AccessToken);
                         using var httpClient = new HttpClient();
