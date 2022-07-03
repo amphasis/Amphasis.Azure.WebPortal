@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,8 +11,19 @@ namespace Amphasis.Azure.WebPortal.Pages
     [Authorize]
     public class ProfileModel : PageModel
     {
+        public ProfileModel()
+        {
+
+        }
+
         public void OnGet()
         {
+        }
+
+        public IActionResult OnPost()
+        {
+            if (!User.Identity.IsAuthenticated) return Redirect("/");
+            return SignOut();
         }
     }
 }
