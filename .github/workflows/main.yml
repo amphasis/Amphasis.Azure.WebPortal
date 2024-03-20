@@ -1,13 +1,37 @@
+# This workflow will build and push a .NET Core app to an Azure Web App when a commit is pushed to your default branch.
+#
+# This workflow assumes you have already created the target Azure App Service web app.
+# For instructions see https://docs.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore?tabs=net60&pivots=development-environment-vscode
+#
+# To configure this workflow:
+#
+# 1. Download the Publish Profile for your Azure Web App. You can download this file from the Overview page of your Web App in the Azure Portal.
+#    For more information: https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel#generate-deployment-credentials
+#
+# 2. Create a secret in your repository named AZURE_WEBAPP_PUBLISH_PROFILE, paste the publish profile contents as the value of the secret.
+#    For instructions on obtaining the publish profile see: https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the-github-secret
+#
+# 3. Change the value for the AZURE_WEBAPP_NAME. Optionally, change the AZURE_WEBAPP_PACKAGE_PATH and DOTNET_VERSION environment variables below.
+#
+# For more information on GitHub Actions for Azure: https://github.com/Azure/Actions
+# For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
+
 name: Deploy ASP.NET Core app to Azure Web App
 
 on:
   push:
     branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 env:
   NUGET_USERNAME: amphasis
   NUGET_SOURCE: https://nuget.pkg.github.com/amphasis/index.json
-  DOTNET_VERSION: '6.0.100'
+  NUGET_SOURCE_NAME: nuget.pkg.github.com/amphasis
+  DOTNET_VERSION: '8.0.x'
   AZURE_WEBAPP_NAME: 'leff'
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   AZURE_WEBAPP_PROJECT_PATH: 'Amphasis.Azure.WebPortal'
@@ -18,18 +42,18 @@ jobs:
     steps:
 
       # Checkout the repo
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
 
       # Setup .NET Core SDK
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }} 
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       # Restore packages
       - name: Restore packages
         run: |
-          dotnet nuget add source ${{ env.NUGET_SOURCE }} --name "private-packages" --store-password-in-clear-text --username ${{ env.NUGET_USERNAME }} --password ${{ secrets.PACKAGES_TOKEN }}
+          dotnet nuget update source ${{ env.NUGET_SOURCE_NAME }} --store-password-in-clear-text --username ${{ env.NUGET_USERNAME }} --password ${{ secrets.PACKAGES_TOKEN }}
           dotnet restore
 
       # Run dotnet build and publish
@@ -40,8 +64,9 @@ jobs:
 
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
-        with: 
+        with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }}
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/${{ env.AZURE_WEBAPP_PROJECT_PATH }}'
