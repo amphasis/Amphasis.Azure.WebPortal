@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Amphasis.Azure.WebPortal.Extensions;
+using Amphasis.Azure.WebPortal.Helpers;
 using Amphasis.Azure.WebPortal.SimaLand.Models;
 using Amphasis.Azure.WebPortal.SimaLand.Models.Enums;
 using Amphasis.SimaLand;
@@ -15,7 +15,7 @@ using Microsoft.Extensions.Options;
 
 namespace Amphasis.Azure.WebPortal.SimaLand.Services
 {
-    public class SimaLandService
+	public class SimaLandService
     {
         private const string ApiClientAccessTokenKey = nameof(ApiClientAccessTokenKey);
         private static readonly TimeSpan TokenExpirationSkew = TimeSpan.FromSeconds(30);
@@ -74,10 +74,10 @@ namespace Amphasis.Azure.WebPortal.SimaLand.Services
         }
 
         private async Task<string> TokenFactoryAsync(ICacheEntry cacheEntry)
-        {
-            string token = await _apiClient.GetAccessTokenAsync(_configuration.Email, _configuration.Password);
-            var jwtSecurityToken = new JwtSecurityToken(token);
-            cacheEntry.AbsoluteExpiration = jwtSecurityToken.ValidTo - TokenExpirationSkew;
+        { 
+            var token = await _apiClient.GetAccessTokenAsync(_configuration.Email, _configuration.Password);
+            var validTo = JwtHelper.GetValidTo(token);
+            cacheEntry.AbsoluteExpiration = validTo - TokenExpirationSkew;
 
             return token;
         }
