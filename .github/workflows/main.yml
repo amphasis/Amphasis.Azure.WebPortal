@@ -33,7 +33,7 @@ env:
   NUGET_SOURCE_NAME: nuget.pkg.github.com/amphasis
   DOTNET_VERSION: '8.0.x'
   AZURE_WEBAPP_NAME: 'leff'
-  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  AZURE_WEBAPP_PACKAGE_PATH: 'publishedApplication'
   AZURE_WEBAPP_PROJECT_PATH: 'Amphasis.Azure.WebPortal'
 
 jobs:
@@ -69,7 +69,7 @@ jobs:
       - name: Build and publish
         run: |
           dotnet build --configuration Release
-          dotnet publish -c Release -o ${{ env.AZURE_WEBAPP_PROJECT_PATH }} -maxcpucount:1
+          dotnet publish ${{ env.AZURE_WEBAPP_PROJECT_PATH }} -c Release -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }} -maxcpucount:1
 
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
@@ -78,4 +78,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/${{ env.AZURE_WEBAPP_PROJECT_PATH }}'
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
