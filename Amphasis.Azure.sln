@@ -5,7 +5,15 @@ VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amphasis.Azure.WebPortal", "Amphasis.Azure.WebPortal\Amphasis.Azure.WebPortal.csproj", "{79F4B347-9FDF-4545-AFF5-BF6D1A52839C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CentralPackageManagement", "CentralPackageManagement", "{45D72010-48B6-4155-ABEC-BD2CB5CF6CC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amphasis.Azure.SimaLand", "SimaLand.Module\Amphasis.Azure.SimaLand.csproj", "{F31C7A7B-823D-412B-9478-F918E63EF86F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amphasis.Azure.Yandex", "Yandex.Module\Amphasis.Azure.Yandex.csproj", "{A61554FE-ED7D-4562-AC77-83ACE937E1E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{41FE59B9-95CE-4872-9D87-E182E6572FC3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amphasis.Azure.Common", "Amphasis.Azure.Common\Amphasis.Azure.Common.csproj", "{723C94AD-D598-4928-AF4B-38A11AB0C922}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CentralPackageManagement", "CentralPackageManagement", "{43BD19FF-2E6A-4113-89CA-E327B2617370}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Packages.props = Directory.Packages.props
 		nuget.config = nuget.config
@@ -21,9 +29,26 @@ Global
 		{79F4B347-9FDF-4545-AFF5-BF6D1A52839C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79F4B347-9FDF-4545-AFF5-BF6D1A52839C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79F4B347-9FDF-4545-AFF5-BF6D1A52839C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F31C7A7B-823D-412B-9478-F918E63EF86F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F31C7A7B-823D-412B-9478-F918E63EF86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F31C7A7B-823D-412B-9478-F918E63EF86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F31C7A7B-823D-412B-9478-F918E63EF86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A61554FE-ED7D-4562-AC77-83ACE937E1E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A61554FE-ED7D-4562-AC77-83ACE937E1E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A61554FE-ED7D-4562-AC77-83ACE937E1E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A61554FE-ED7D-4562-AC77-83ACE937E1E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{723C94AD-D598-4928-AF4B-38A11AB0C922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{723C94AD-D598-4928-AF4B-38A11AB0C922}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{723C94AD-D598-4928-AF4B-38A11AB0C922}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{723C94AD-D598-4928-AF4B-38A11AB0C922}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F31C7A7B-823D-412B-9478-F918E63EF86F} = {41FE59B9-95CE-4872-9D87-E182E6572FC3}
+		{A61554FE-ED7D-4562-AC77-83ACE937E1E2} = {41FE59B9-95CE-4872-9D87-E182E6572FC3}
+		{723C94AD-D598-4928-AF4B-38A11AB0C922} = {41FE59B9-95CE-4872-9D87-E182E6572FC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90DA7225-153B-4C94-9D16-17D932B5657F}

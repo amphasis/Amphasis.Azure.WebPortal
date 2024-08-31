@@ -1,21 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <UserSecretsId>3ad90e84-123b-437a-ad29-dd08e1e3db34</UserSecretsId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+		<UserSecretsId>3ad90e84-123b-437a-ad29-dd08e1e3db34</UserSecretsId>
+	</PropertyGroup>
 
 
-  <ItemGroup>
-    <PackageReference Include="Amphasis.SimaLand" />
-    <PackageReference Include="AspNet.Security.OAuth.MailRu" />
-    <PackageReference Include="AspNet.Security.OAuth.Vkontakte" />
-    <PackageReference Include="AspNet.Security.OAuth.Yandex" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
-    <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Amphasis.SimaLand" />
+		<PackageReference Include="AspNet.Security.OAuth.MailRu" />
+		<PackageReference Include="AspNet.Security.OAuth.Vkontakte" />
+		<PackageReference Include="AspNet.Security.OAuth.Yandex" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+		<PackageReference Include="SkiaSharp" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Amphasis.Azure.Common\Amphasis.Azure.Common.csproj" />
+		<ProjectReference Include="..\SimaLand.Module\Amphasis.Azure.SimaLand.csproj" />
+		<ProjectReference Include="..\Yandex.Module\Amphasis.Azure.Yandex.csproj" />
+	</ItemGroup>
 
 </Project>

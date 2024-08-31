@@ -6,24 +6,23 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Amphasis.Azure.WebPortal.Pages
+namespace Amphasis.Azure.WebPortal.Pages;
+
+[Authorize]
+public class ProfileModel : PageModel
 {
-    [Authorize]
-    public class ProfileModel : PageModel
+    public ProfileModel()
     {
-        public ProfileModel()
-        {
 
-        }
+    }
 
-        public void OnGet()
-        {
-        }
+    public void OnGet()
+    {
+    }
 
-        public IActionResult OnPost()
-        {
-            if (!User.Identity.IsAuthenticated) return Redirect("/");
-            return SignOut();
-        }
+    public IActionResult OnPost()
+    {
+        if (!User.Identity.IsAuthenticated) return Redirect("/");
+        return SignOut();
     }
 }

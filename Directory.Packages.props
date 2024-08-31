@@ -3,13 +3,13 @@
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageVersion Include="Amphasis.SimaLand" Version="1.1.13" />
-		<PackageVersion Include="AspNet.Security.OAuth.MailRu" Version="8.1.0" />
-		<PackageVersion Include="AspNet.Security.OAuth.Vkontakte" Version="8.1.0" />
-		<PackageVersion Include="AspNet.Security.OAuth.Yandex" Version="8.1.0" />
-		<PackageVersion Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.8" />
-		<PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
-		<PackageVersion Include="SkiaSharp" Version="2.88.8" />
-		<PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
+		<PackageVersion Include="Amphasis.SimaLand" Version="[1.1.13]" />
+		<PackageVersion Include="AspNet.Security.OAuth.MailRu" Version="[8.1.0]" />
+		<PackageVersion Include="AspNet.Security.OAuth.Vkontakte" Version="[8.1.0]" />
+		<PackageVersion Include="AspNet.Security.OAuth.Yandex" Version="[8.1.0]" />
+		<PackageVersion Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="[8.0.8]" />
+		<PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="[8.0.4]" />
+		<PackageVersion Include="SkiaSharp" Version="[2.88.8]" />
+		<PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="[8.0.2]" />
 	</ItemGroup>
 </Project>
