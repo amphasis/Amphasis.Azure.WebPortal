@@ -8,14 +8,14 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Amphasis.SimaLand" Version="1.1.13" />
-    <PackageReference Include="AspNet.Security.OAuth.MailRu" Version="8.1.0" />
-    <PackageReference Include="AspNet.Security.OAuth.Vkontakte" Version="8.1.0" />
-    <PackageReference Include="AspNet.Security.OAuth.Yandex" Version="8.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.8" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
-    <PackageReference Include="SkiaSharp" Version="2.88.8" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
+    <PackageReference Include="Amphasis.SimaLand" />
+    <PackageReference Include="AspNet.Security.OAuth.MailRu" />
+    <PackageReference Include="AspNet.Security.OAuth.Vkontakte" />
+    <PackageReference Include="AspNet.Security.OAuth.Yandex" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
   </ItemGroup>
 
 </Project>
