@@ -1,12 +1,12 @@
 ﻿using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Amphasis.Azure.WebPortal.Models;
+using Amphasis.Azure.Common.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Amphasis.Azure.WebPortal.TestAuthentication;
+namespace Amphasis.Azure.WebPortal.Authentication;
 
 internal sealed class TestAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {

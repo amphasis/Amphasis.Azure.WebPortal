@@ -30,7 +30,7 @@ permissions:
 env:
   NUGET_USERNAME: amphasis
   NUGET_SOURCE: https://nuget.pkg.github.com/amphasis/index.json
-  NUGET_SOURCE_NAME: nuget.pkg.github.com/amphasis
+  NUGET_SOURCE_NAME: NugetGithubAmphasis
   DOTNET_VERSION: '8.0.x'
   AZURE_WEBAPP_NAME: 'leff'
   AZURE_WEBAPP_PACKAGE_PATH: 'publishedApplication'

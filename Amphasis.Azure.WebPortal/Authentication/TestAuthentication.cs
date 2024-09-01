@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 
-namespace Amphasis.Azure.WebPortal.TestAuthentication;
+namespace Amphasis.Azure.WebPortal.Authentication;
 
 internal static class TestAuthentication
 {
