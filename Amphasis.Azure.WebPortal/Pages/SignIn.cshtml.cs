@@ -12,14 +12,12 @@ using Microsoft.Extensions.Options;
 
 namespace Amphasis.Azure.WebPortal.Pages;
 
-public class SignInModel : PageModel
+public sealed class SignInModel : PageModel
 {
-	public class AuthenticationSchemeInfo
-	{
-		public string Name { get; set; }
-		public string DisplayName { get; set; }
-		public string IconUrl { get; set; }
-	}
+	public sealed record AuthenticationSchemeInfo(
+		string Name,
+		string? DisplayName,
+		string IconUrl);
 
 	private readonly IAuthenticationSchemeProvider _authenticationSchemeProvider;
 	private readonly IFileProvider _fileProvider;
@@ -33,14 +31,11 @@ public class SignInModel : PageModel
 		_fileProvider = staticFileOptions.Value.FileProvider ?? webHostEnvironment.WebRootFileProvider;
 	}
 
-	public IEnumerable<AuthenticationSchemeInfo> AuthenticationSchemes { get; set; }
+	public IEnumerable<AuthenticationSchemeInfo> AuthenticationSchemes { get; set; } = null!;
 
-	[FromQuery]
-	[FromForm]
-	public string ReturnUrl { get; set; }
+	[FromQuery] [FromForm] public string? ReturnUrl { get; set; }
 
-	[FromForm]
-	public string Provider { get; set; }
+	[FromForm] public string Provider { get; set; } = null!;
 
 	public async Task<ActionResult> OnGet()
 	{
@@ -51,12 +46,10 @@ public class SignInModel : PageModel
 
 		AuthenticationSchemes = schemesEnumerable
 			.Where(scheme => !string.IsNullOrEmpty(scheme.DisplayName))
-			.Select(scheme => new AuthenticationSchemeInfo
-			{
-				Name = scheme.Name,
-				DisplayName = scheme.DisplayName,
-				IconUrl = GetProviderIconUrl(scheme.Name)
-			});
+			.Select(scheme => new AuthenticationSchemeInfo(
+				Name: scheme.Name,
+				DisplayName: scheme.DisplayName,
+				IconUrl: getProviderIconUrl(scheme.Name)));
 
 		return Page();
 	}
@@ -75,7 +68,7 @@ public class SignInModel : PageModel
 		return Challenge(properties, Provider);
 	}
 
-	private string GetProviderIconUrl(string providerSchemeName)
+	private string getProviderIconUrl(string providerSchemeName)
 	{
 		var iconPath = $"/external/{providerSchemeName}.png";
 		var iconFileInfo = _fileProvider.GetFileInfo(iconPath);

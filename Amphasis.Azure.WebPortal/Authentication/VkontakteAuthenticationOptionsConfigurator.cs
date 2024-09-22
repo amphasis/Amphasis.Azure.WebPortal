@@ -20,17 +20,19 @@ public static class VkontakteAuthenticationOptionsConfigurator
 		var identity = context.Identity;
 		var originalImageClaim = identity?.FindFirst(VkontakteAuthenticationConstants.Claims.PhotoUrl);
 
-		if (originalImageClaim != null)
+		if (identity == null || originalImageClaim == null)
 		{
-			identity.RemoveClaim(originalImageClaim);
-
-			var newImageClaim = new Claim(
-				CustomClaims.UserImageUrl,
-				originalImageClaim.Value,
-				originalImageClaim.ValueType);
-
-			identity.AddClaim(newImageClaim);
+			return Task.CompletedTask;
 		}
+
+		identity.RemoveClaim(originalImageClaim);
+
+		var newImageClaim = new Claim(
+			CustomClaims.UserImageUrl,
+			originalImageClaim.Value,
+			originalImageClaim.ValueType);
+
+		identity.AddClaim(newImageClaim);
 
 		return Task.CompletedTask;
 	}
