@@ -1,7 +1,6 @@
 using Amphasis.Azure.SimaLand;
 using Amphasis.Azure.WebPortal.Authentication;
 using Amphasis.Azure.Yandex.Models;
-using Amphasis.Azure.Yandex.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -27,18 +26,10 @@ services.Configure<CookiePolicyOptions>(options =>
 
 var authenticationBuilder = services
 	.AddAuthentication(options => options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme)
-	.AddCookie(options =>
-	{
-		options.Cookie.HttpOnly = true;
-		options.Cookie.SameSite = SameSiteMode.Strict;
-		options.Cookie.SecurePolicy = applicationBuilder.Environment.IsDevelopment()
-			? CookieSecurePolicy.None
-			: CookieSecurePolicy.Always;
-		options.LoginPath = "/SignIn";
-	})
-	.AddMailRu(options => MailRuAuthenticationOptionsConfigurator.ConfigureOptions(configuration, options))
-	.AddVkontakte(options => VkontakteAuthenticationOptionsConfigurator.ConfigureOptions(configuration, options))
-	.AddYandex(options => YandexAuthenticationOptionsConfigurator.ConfigureOptions(configuration, options));
+	.AddCookie(options => options.Configure(applicationBuilder))
+	.AddMailRu(options => options.Configure(configuration))
+	.AddVkontakte(options => options.Configure(configuration))
+	.AddYandex(options => options.Configure(configuration));
 
 if (applicationBuilder.Environment.IsDevelopment())
 {
