@@ -27,7 +27,15 @@ services.Configure<CookiePolicyOptions>(options =>
 
 var authenticationBuilder = services
 	.AddAuthentication(options => options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme)
-	.AddCookie(options => options.LoginPath = "/SignIn")
+	.AddCookie(options =>
+	{
+		options.Cookie.HttpOnly = true;
+		options.Cookie.SameSite = SameSiteMode.Strict;
+		options.Cookie.SecurePolicy = applicationBuilder.Environment.IsDevelopment()
+			? CookieSecurePolicy.None
+			: CookieSecurePolicy.Always;
+		options.LoginPath = "/SignIn";
+	})
 	.AddMailRu(options => MailRuAuthenticationOptionsConfigurator.ConfigureOptions(configuration, options))
 	.AddVkontakte(options => VkontakteAuthenticationOptionsConfigurator.ConfigureOptions(configuration, options))
 	.AddYandex(options => YandexAuthenticationOptionsConfigurator.ConfigureOptions(configuration, options));
